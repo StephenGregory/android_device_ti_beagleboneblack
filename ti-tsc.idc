@@ -1,4 +1,4 @@
-# Copyright (C) 2010 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,25 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := $(call my-dir)
+#
+# Input Device Calibration File for the EVM-SK touch screen.
+#
 
-ifeq ($(TARGET_DEVICE),beagleboneblack)
-#ifeq ($(TARGET_DEVICE),galaxysbmtd)
+device.internal = 1
 
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := s3c-keypad.kcm
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_KEY_CHAR_MAP)
+touch.deviceType = touchScreen
+touch.orientationAware = 1
 
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := cypress-touchkey.kcm
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_KEY_CHAR_MAP)
+touch.size.calibration = diameter
+#touch.size.scale = 22.5
+touch.size.bias = 0
+touch.size.isSummed = 0
 
-ifneq ($(TARGET_SIMULATOR),true)
-include $(call all-makefiles-under,$(LOCAL_PATH))
-endif
+touch.pressure.calibration = amplitude
+#touch.pressure.scale = 0.0125
 
-endif
-
-
+touch.orientation.calibration = none

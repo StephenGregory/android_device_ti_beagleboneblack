@@ -34,23 +34,95 @@
 # and is used by people who have access to binary versions of the drivers
 # but not to the original vendor tree. Be sure to update both.
 
-# These are the hardware-specific configuration files
+
 PRODUCT_COPY_FILES := \
-	device/samsung/galaxysbmtd/asound.conf:system/etc/asound.conf
+	device/ti/beagleboneblack/init.am335xevm.rc:root/init.am335xevm.rc \
+	device/ti/beagleboneblack/init.am335xevm.usb.rc:root/init.am335xevm.usb.rc \
+	device/ti/beagleboneblack/vold.fstab:system/etc/vold.fstab \
+	device/ti/beagleboneblack/fstab.am335xevm:root/fstab.am335xevm \
+	device/ti/beagleboneblack/ueventd.am335xevm.rc:root/ueventd.am335xevm.rc \
+	device/ti/beagleboneblack/media_codecs.xml:system/etc/media_codecs.xml \
+	device/ti/beagleboneblack/media_profiles.xml:system/etc/media_profiles.xml \
+	device/ti/beagleboneblack/mixer_paths.xml:system/etc/mixer_paths.xml \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf
+
+
+# KeyPads
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
+
+PRODUCT_PROPERTY_OVERRIDES := \
+       hwui.render_dirty_regions=false
+
+# Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.sf.lcd_density=160
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.strictmode.visual=0 \
+	persist.sys.strictmode.disable=1
+
+PRODUCT_CHARACTERISTICS := tablet,nosdcard
+
+DEVICE_PACKAGE_OVERLAYS := \
+    device/ti/beagleboneblack/overlay
+
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+PRODUCT_PACKAGES += \
+	librs_jni \
+	com.android.future.usb.accessory
+
+PRODUCT_PACKAGES += \
+	libaudioutils
+
+PRODUCT_PACKAGES += \
+        audio.primary.beagleboneblack \
+        tinycap \
+        tinymix \
+        tinyplay
+
+PRODUCT_PACKAGES += \
+	dhcpcd.conf
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+	make_ext4fs
+
+# Backlight HAL (liblights)
+PRODUCT_PACKAGES += \
+	lights.beagleboneblack
+
+PRODUCT_PACKAGES += \
+	FileManager-1.1.6
+
+PRODUCT_PACKAGES += \
+	androidvncserver
+
+PRODUCT_PACKAGES += \
+	camera.omap3
+
+PRODUCT_NAME := beagleboneblack
+
+
+# These are the hardware-specific configuration files
+#PRODUCT_COPY_FILES := \
+#	device/samsung/galaxysbmtd/asound.conf:system/etc/asound.conf
 
 # Prebuilt kl keymaps
-PRODUCT_COPY_FILES += \
-	device/samsung/galaxysbmtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl
+#PRODUCT_COPY_FILES += \
+#	device/samsung/galaxysbmtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl
 
 # We have FFC
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml
+#PRODUCT_COPY_FILES += \
+#	frameworks/native/data/etc/#android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml
 
 # Inherit Aries common device configuration.
-$(call inherit-product, device/samsung/aries-common/device_base.mk)
+#$(call inherit-product, device/samsung/aries-common/device_base.mk)
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/galaxysbmtd/galaxysbmtd-vendor.mk)
+#$(call inherit-product-if-exists, vendor/samsung/galaxysbmtd/galaxysbmtd-vendor.mk)

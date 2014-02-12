@@ -1,7 +1,9 @@
 #!/bin/sh
 
-VENDOR=samsung
-DEVICE=galaxysbmtd
+VENDOR=ti
+DEVICE=beagleboneblack
+#VENDOR=samsung
+#DEVICE=galaxysbmtd
 COMMON=aries-common
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary

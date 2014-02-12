@@ -27,3 +27,6 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/full_galaxysbmtd.mk
+
+PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/full_beagleboneblack.mk
