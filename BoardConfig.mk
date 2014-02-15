@@ -20,15 +20,20 @@
 #added
 #TARGET_ARCH:= set to arm for almost all current Android devices.
 TARGET_ARCH := arm
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
 
 #BOARD_KERNEL_CMDLINE:= not all devices pass boot parameters however if your device does this must be filled out properly in order to boot successfully.
 #BOARD_KERNEL_CMDLINE :=
 
 #BOARD_KERNEL_PAGESIZE:= the pagesize of the stock boot.img and must be set properly in order to boot. Typical values for this are 2048 and 4096 and this information can be extracted from the stock kernel.
+BOARD_KERNEL_PAGESIZE:= 0x00002048
 
 #BOARD_BOOTIMAGE_PARTITION_SIZE:= the number of bytes allocated to the kernel image partition.
+BOARD_BOOTIMAGE_PARTITION_SIZE:= 10485760 #something random
 
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE:= the number of bytes allocated to the recovery image partition.
+BOARD_RECOVERYIMAGE_PARTITION_SIZE:= 10485760 #something random
 
 #BOARD_SYSTEMIMAGE_PARTITION_SIZE:= the number of bytes allocated to the Android system filesystem partition.
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 268435456
