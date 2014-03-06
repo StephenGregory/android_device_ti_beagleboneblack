@@ -12,3 +12,5 @@
 #/system		ext4		/dev/lvpool/system
 
 #/external_sd		vfat		/dev/block/mmcblk1p1    lun=/sys/devices/platform/s3c-usbgadget/gadget/lun1/file
+
+#/dev/block/platform/omap/omap_hsmmc.0/mmcblk0p3  /data               ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait

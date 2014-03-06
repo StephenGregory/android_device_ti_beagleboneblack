@@ -4,7 +4,6 @@
 #TARGET_BOOTANIMATION_NAME := vertical-480x262
 
 # Release name
-#PRODUCT_RELEASE_NAME := GalaxyS_B
 PRODUCT_RELEASE_NAME := beagleboneblack
 
 # Inherit some common CM stuff.
@@ -12,16 +11,12 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/ti/beagleboneblack/full_beagleboneblack.mk)
-#$(call inherit-product, device/samsung/galaxysbmtd/full_galaxysbmtd.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := beagleboneblack
 PRODUCT_NAME := cm_beagleboneblack
 PRODUCT_BRAND := ti
 PRODUCT_MODEL := 1
-#PRODUCT_DEVICE := galaxysbmtd
-#PRODUCT_NAME := cm_galaxysbmtd
-#PRODUCT_BRAND := samsung
 #PRODUCT_MODEL := GT-I9000B
 
 #Set build fingerprint / ID / Prduct Name ect.

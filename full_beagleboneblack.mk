@@ -25,7 +25,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
 
 $(call inherit-product, device/ti/beagleboneblack/device.mk)
-#$(call inherit-product, device/samsung/galaxysbmtd/device.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
@@ -36,10 +35,6 @@ PRODUCT_LOCALES += hdpi
 PRODUCT_NAME := full_beagleboneblack
 PRODUCT_DEVICE := beagleboneblack
 PRODUCT_BRAND := ti
+PRODUCT_MANUFACTURER := ti
 PRODUCT_MODEL := 1
-
-#PRODUCT_NAME := full_galaxysbmtd
-#PRODUCT_DEVICE := galaxysbmtd
-#PRODUCT_BRAND := samsung
-#PRODUCT_MANUFACTURER := samsung
 #PRODUCT_MODEL := GT-I9000B

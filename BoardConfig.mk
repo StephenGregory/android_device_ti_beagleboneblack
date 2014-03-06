@@ -18,22 +18,30 @@
 #
 
 #added
+#BOARD_USES_GENERIC_AUDIO := true
+#BOARD_EGL_CFG := device/ti/beagleboneblack/egl.cfg
+
 #TARGET_ARCH:= set to arm for almost all current Android devices.
 TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon#not for recovery
+ARCH_ARM_HAVE_TLS_REGISTER := true#not for recovery
+
+TARGET_KERNEL_CONFIG := beagleboneblack_defconfig
+TARGET_NO_KERNEL := false#not for recovery, don't use prebuilt kernel
+TARGET_NO_BOOTLOADER := true#not for recovery, this is a non-fastboot indication
 
 #BOARD_KERNEL_CMDLINE:= not all devices pass boot parameters however if your device does this must be filled out properly in order to boot successfully.
-#BOARD_KERNEL_CMDLINE :=
 
 #BOARD_KERNEL_PAGESIZE:= the pagesize of the stock boot.img and must be set properly in order to boot. Typical values for this are 2048 and 4096 and this information can be extracted from the stock kernel.
 BOARD_KERNEL_PAGESIZE:= 0x00002048
 
 #BOARD_BOOTIMAGE_PARTITION_SIZE:= the number of bytes allocated to the kernel image partition.
-BOARD_BOOTIMAGE_PARTITION_SIZE:= 10485760 #something random
+BOARD_BOOTIMAGE_PARTITION_SIZE:= 10485760#something random
 
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE:= the number of bytes allocated to the recovery image partition.
-BOARD_RECOVERYIMAGE_PARTITION_SIZE:= 10485760 #something random
+BOARD_RECOVERYIMAGE_PARTITION_SIZE:= 10485760#something random
 
 #BOARD_SYSTEMIMAGE_PARTITION_SIZE:= the number of bytes allocated to the Android system filesystem partition.
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 268435456
@@ -41,14 +49,32 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 268435456
 
 #BOARD_USERDATAIMAGE_PARTITION_SIZE:= the number of bytes allocated to the Android data filesystem partition.
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 536870912
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_FLASH_BLOCK_SIZE := 4096#not recvoery
 
 #BOARD_HAS_NO_SELECT_BUTTON: (optional), use this if your device needs to use its Power button to confirm selections in recovery.
 #BOARD_MKBOOTIMG_ARGS: (optional), use these to force a specific address for the ramdisk. This is usually needed on larger partitions in order for the ramdisk to be loaded properly where it's expected to exist. This value can be obtained from the stock kernel. 
 
+#BOARD_HAVE_BLUETOOTH := false
+
+#TARGET_NO_RECOVERY := true
+
+#TARGET_NO_RADIOIMAGE := true
+#TARGET_BOARD_PLATFORM := omap3
+#TARGET_BOOTLOADER_BOARD_NAME := beagleboneblack
+#BOARD_USB_CAMERA := true
+#USE_OPENGL_RENDERER := true
+
+#TARGET_PROVIDES_INIT_RC := true #this isn't enabled in old src
+
+#this is all extra
+#BOARD_WPA_SUPPLICANT_DRIVER      := WEXT
+#BOARD_HOSTAPD_DRIVER             := WEXT
+#WPA_SUPPLICANT_VERSION           := VER_0_8_X
+#BOARD_WLAN_DEVICE                := wlan0
+
 #end added
 
-#Video Devices
-#BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # Kernel Config
 #TARGET_KERNEL_CONFIG := cyanogenmod_galaxysbmtd_defconfig

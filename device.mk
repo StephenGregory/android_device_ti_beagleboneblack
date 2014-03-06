@@ -46,10 +46,9 @@ PRODUCT_COPY_FILES := \
 	device/ti/beagleboneblack/mixer_paths.xml:system/etc/mixer_paths.xml \
 	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf
 
-
 # KeyPads
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio_keys_12.kl \
     $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
 
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -105,6 +104,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_NAME := beagleboneblack
 
+$(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
 # These are the hardware-specific configuration files
 #PRODUCT_COPY_FILES := \

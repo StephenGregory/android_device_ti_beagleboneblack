@@ -11,26 +11,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),beagleboneblack)
-#ifeq ($(TARGET_DEVICE),galaxysbmtd)
+# if some modules are built directly from this directory (not subdirectories),
+# their rules should be written here.
 
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := s3c-keypad.kcm
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_KEY_CHAR_MAP)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := cypress-touchkey.kcm
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_KEY_CHAR_MAP)
-
-ifneq ($(TARGET_SIMULATOR),true)
 include $(call all-makefiles-under,$(LOCAL_PATH))
-endif
 
-endif
+#ifeq ($(TARGET_DEVICE),beagleboneblack)
+
+#include $(CLEAR_VARS)
+#LOCAL_SRC_FILES := s3c-keypad.kcm
+#LOCAL_MODULE_TAGS := optional
+#include $(BUILD_KEY_CHAR_MAP)
+
+#include $(CLEAR_VARS)
+#LOCAL_SRC_FILES := cypress-touchkey.kcm
+#LOCAL_MODULE_TAGS := optional
+#include $(BUILD_KEY_CHAR_MAP)
+
+#ifneq ($(TARGET_SIMULATOR),true)
+#include $(call all-makefiles-under,$(LOCAL_PATH))
+#endif
+#endif
 
 
