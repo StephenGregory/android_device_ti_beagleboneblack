@@ -29,9 +29,9 @@ TARGET_ARCH_VARIANT := armv7-a-neon#not for recovery
 ARCH_ARM_HAVE_TLS_REGISTER := true#not for recovery
 
 # Kernel Config
-TARGET_KERNEL_CONFIG := beagleboneblack_defconfig
-TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/3.8.13-bone40.1.zImage
-TARGET_NO_KERNEL := false#not for recovery, don't use prebuilt kernel
+TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/3.8.13-bone40.1.zImage #specify path for prebuilt kernel
+TARGET_NO_KERNEL := true #flag for whether or not to use prebuilt kernel
+#TARGET_KERNEL_CONFIG := beagleboneblack_defconfig, configuration file for the BBB filename in linux-dev/KERNEL/arch/arm/config
 TARGET_NO_BOOTLOADER := true#not for recovery, this is a non-fastboot indication
 
 #BOARD_KERNEL_CMDLINE:= #not all devices pass boot parameters however if your device does this must be filled out properly in order to boot successfully.
@@ -71,7 +71,14 @@ TARGET_PROVIDES_INIT_RC := true #this isn't enabled in old src
 #WPA_SUPPLICANT_VERSION           := VER_0_8_X
 #BOARD_WLAN_DEVICE                := wlan0
 
+
+
 ############SAMSUNG#################
+
+# Boot Animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_BOOTANIMATION_USE_RGB565 := true
 
 # FM Radio
 #BOARD_HAVE_FM_RADIO := true

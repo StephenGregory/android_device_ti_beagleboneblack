@@ -87,7 +87,8 @@ PRODUCT_COPY_FILES += \
 	kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko:system/lib/modules/rtlwifi.ko \
 	kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko:system/lib/modules/rtl8192c-common.ko \
 	kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu.ko:system/lib/modules/rtl8192cu.ko \
-#	device/ti/beagleboneblack/rtl8192cufw.bin:root/lib/firmware/rtlwifi/rtl8192cufw.bin \
+	device/ti/beagleboneblack/rtl8192cufw.bin:root/lib/firmware/rtlwifi/rtl8192cufw.bin \
+	device/ti/beagleboneblack/rt2870.bin:root/lib/firmware/rt2870.bin \
 	device/ti/beagleboneblack/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
 
 # Filesystem management tools
