@@ -34,6 +34,6 @@ $ cp .config /arch/arm/config/beagleboneblack_defconfig
 
 If using prebuilt kernel, comment/set the following lines:
 # Kernel Config
-TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/3.8.13-bone40.1.zImage #specify path for prebuilt kernel
+TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/zImage #specify path for prebuilt kernel
 TARGET_NO_KERNEL := false
 #TARGET_KERNEL_CONFIG := beagleboneblack_defconfig, configuration file for the BBB filename in linux-dev/KERNEL/arch/arm/config

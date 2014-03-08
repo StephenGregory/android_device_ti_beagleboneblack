@@ -29,7 +29,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon#not for recovery
 ARCH_ARM_HAVE_TLS_REGISTER := true#not for recovery
 
 # Kernel Config
-TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/3.8.13-bone40.1.zImage #specify path for prebuilt kernel
+TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/zImage #specify path for prebuilt kernel
 TARGET_NO_KERNEL := true #flag for whether or not to use prebuilt kernel
 #TARGET_KERNEL_CONFIG := beagleboneblack_defconfig, configuration file for the BBB filename in linux-dev/KERNEL/arch/arm/config
 TARGET_NO_BOOTLOADER := true#not for recovery, this is a non-fastboot indication
