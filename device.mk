@@ -34,22 +34,14 @@
 # and is used by people who have access to binary versions of the drivers
 # but not to the original vendor tree. Be sure to update both.
 
-
-PRODUCT_COPY_FILES := \
-	device/ti/beagleboneblack/init.am335xevm.rc:root/init.am335xevm.rc \
-	device/ti/beagleboneblack/init.am335xevm.usb.rc:root/init.am335xevm.usb.rc \
-	device/ti/beagleboneblack/vold.fstab:system/etc/vold.fstab \
-	device/ti/beagleboneblack/fstab.am335xevm:root/fstab.am335xevm \
-	device/ti/beagleboneblack/ueventd.am335xevm.rc:root/ueventd.am335xevm.rc \
-	device/ti/beagleboneblack/media_codecs.xml:system/etc/media_codecs.xml \
-	device/ti/beagleboneblack/media_profiles.xml:system/etc/media_profiles.xml \
-	device/ti/beagleboneblack/mixer_paths.xml:system/etc/mixer_paths.xml \
-	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf
-
 # KeyPads
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio_keys_12.kl \
+    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio_keys_13.kl \
     $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
+
+# These are the hardware-specific configuration files
+PRODUCT_COPY_FILES := \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf 
 
 PRODUCT_PROPERTY_OVERRIDES := \
        hwui.render_dirty_regions=false
@@ -106,13 +98,8 @@ PRODUCT_NAME := beagleboneblack
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
-# These are the hardware-specific configuration files
-#PRODUCT_COPY_FILES := \
-#	device/samsung/galaxysbmtd/asound.conf:system/etc/asound.conf
 
-# Prebuilt kl keymaps
-#PRODUCT_COPY_FILES += \
-#	device/samsung/galaxysbmtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl
+###############SAMSUNG##############
 
 # We have FFC
 #PRODUCT_COPY_FILES += \

@@ -52,33 +52,43 @@ PRODUCT_PROPERTY_OVERRIDES := \
         net.dns1=8.8.8.8 \
         net.dns2=8.8.4.4
 
-#DEVICE_PACKAGE_OVERLAYS := device/samsung/aries-common/overlay
+DEVICE_PACKAGE_OVERLAYS := device/ti/beagleboneblack/overlay
 
 # These are the hardware-specific configuration files
-#PRODUCT_COPY_FILES := \
-#	device/samsung/galaxysbmtd/asound.conf:system/etc/asound.conf \
-#	device/samsung/aries-common/vold.fstab:system/etc/vold.fstab \
-#	device/samsung/aries-common/egl.cfg:system/lib/egl/egl.cfg
+PRODUCT_COPY_FILES := \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf \
+	device/ti/beagleboneblack/vold.fstab:system/etc/vold.fstab \
+	device/ti/beagleboneblack/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
-#PRODUCT_COPY_FILES += \
-#	device/samsung/aries-common/init.aries.rc:root/init.aries.rc \
-#	device/samsung/aries-common/lpm.rc:root/lpm.rc \
-#	device/samsung/aries-common/ueventd.aries.rc:root/ueventd.aries.rc \
-#	device/samsung/aries-common/setupenv.sh:recovery/root/sbin/setupenv.sh
-
+PRODUCT_COPY_FILES := \
+	device/ti/beagleboneblack/init.am335xevm.rc:root/init.am335xevm.rc \
+	device/ti/beagleboneblack/init.am335xevm.usb.rc:root/init.am335xevm.usb.rc \
+	device/ti/beagleboneblack/vold.fstab:system/etc/vold.fstab \
+	device/ti/beagleboneblack/fstab.am335xevm:root/fstab.am335xevm \
+	device/ti/beagleboneblack/ueventd.am335xevm.rc:root/ueventd.am335xevm.rc \
+	device/ti/beagleboneblack/media_codecs.xml:system/etc/media_codecs.xml \
+	device/ti/beagleboneblack/media_profiles.xml:system/etc/media_profiles.xml \
+	device/ti/beagleboneblack/mixer_paths.xml:system/etc/mixer_paths.xml \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/aries-common/cypress-touchkey.kl:system/usr/keylayout/cypress-touchkey.kl \
-	device/samsung/aries-common/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/galaxysbmtd/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-	device/samsung/aries-common/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl
+	device/ti/beagleboneblack/gpio-keys.kl:system/usr/keylayout/gpio_keys_13.kl
 
-# Generated kcm keymaps
-#PRODUCT_PACKAGES := \
-#       cypress-touchkey.kcm \
-#       s3c-keypad.kcm
+#WiFi
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	device/ti/beagleboneblack/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+#	kernel/net/rfkill/rfkill.ko:system/lib/modules/rfkill.ko \
+#	kernel/net/wireless/cfg80211.ko:system/lib/modules/cfg80211.ko \
+#	kernel/net/mac80211/mac80211.ko:system/lib/modules/mac80211.ko \
+	kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko:system/lib/modules/rtlwifi.ko \
+	kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko:system/lib/modules/rtl8192c-common.ko \
+	kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu.ko:system/lib/modules/rtl8192cu.ko \
+#	device/ti/beagleboneblack/rtl8192cufw.bin:root/lib/firmware/rtlwifi/rtl8192cufw.bin \
+	device/ti/beagleboneblack/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
 
 # Filesystem management tools
 #PRODUCT_PACKAGES += \
@@ -175,17 +185,17 @@ PRODUCT_COPY_FILES += \
 #	$(wildcard device/ti/beagleboneblack/*.ko),\
 #	$(module):system/lib/modules/$(notdir $(module)))
 
-#ifeq ($(TARGET_PREBUILT_KERNEL),)
-#    LOCAL_KERNEL := device/ti/beagleboneblack/kernel
-#else
-#    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-#endif
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+    LOCAL_KERNEL := device/ti/beagleboneblack/kernel
+else
+    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
 
 #PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+#    $(LOCAL_KERNEL):kernel
 
 #PRODUCT_COPY_FILES += \
-	device/samsung/aries-common/updater.sh:updater.sh
+#	device/samsung/aries-common/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

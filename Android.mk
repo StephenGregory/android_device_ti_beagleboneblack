@@ -18,6 +18,9 @@ LOCAL_PATH := $(call my-dir)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+
+############SAMSUNG#################
+
 #ifeq ($(TARGET_DEVICE),beagleboneblack)
 
 #include $(CLEAR_VARS)

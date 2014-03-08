@@ -28,13 +28,14 @@ $(call inherit-product, device/ti/beagleboneblack/device.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
-# Galaxy S uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
-
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_beagleboneblack
 PRODUCT_DEVICE := beagleboneblack
-PRODUCT_BRAND := ti
-PRODUCT_MANUFACTURER := ti
-PRODUCT_MODEL := 1
-#PRODUCT_MODEL := GT-I9000B
+PRODUCT_BRAND := Cyanogenmod
+PRODUCT_MANUFACTURER := Texas_Instruments_Inc
+
+PRODUCT_MODEL := BEAGLEBONEBLACK
+############SAMSUNG#################
+# Galaxy S uses high-density artwork where available
+#PRODUCT_LOCALES += hdpi
+

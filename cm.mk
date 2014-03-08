@@ -1,5 +1,5 @@
 ## Specify phone tech before including full_phone
-#$(call inherit-product, vendor/cm/config/gsm.mk)
+$(call inherit-product, vendor/cm/config/gsm.mk)
 
 #TARGET_BOOTANIMATION_NAME := vertical-480x262
 
@@ -13,11 +13,11 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, device/ti/beagleboneblack/full_beagleboneblack.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := beagleboneblack
-PRODUCT_NAME := cm_beagleboneblack
-PRODUCT_BRAND := ti
-PRODUCT_MODEL := 1
-#PRODUCT_MODEL := GT-I9000B
+PRODUCT_NAME := beagleboneblack
+PRODUCT_DEVICE := cm_beagleboneblack
+PRODUCT_BRAND := Cyanogenmod
+PRODUCT_MODEL := BEAGLEBONEBLACK
+PRODUCT_MANUFACTURER := Texas_Instruments_Inc
 
 #Set build fingerprint / ID / Prduct Name ect.
 #PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=beagleboneblack TARGET_DEVICE=beagleboneblack BUILD_FINGERPRINT=ti/beagleboneblack/beagleboneblack:4.2.2/ICECREAMSANDWICH/XXJVT:user/release-keys PRIVATE_BUILD_DESC="beagleboneblack-user 4.2.2 ICECREAMSANDWICH XXJVT release-keys"

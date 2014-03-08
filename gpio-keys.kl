@@ -2,5 +2,5 @@
 key 105   BACK               WAKE
 key 106   HOME               WAKE
 key 103   MENU               WAKE
-key 108   SEARCH             WAKE
-key 28    POWER              WAKE
+key 108   VOLUME_UP          WAKE
+key 28    VOLUME_DOWN        WAKE
