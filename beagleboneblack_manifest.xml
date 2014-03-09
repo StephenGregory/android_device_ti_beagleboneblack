@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="StephenGregory/android_device_TI_BeagleBoneBlack" path="device/ti/beagleboneblack" remote="github" revision="cm-10.1" />
+</manifest>
