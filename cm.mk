@@ -13,8 +13,8 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, device/ti/beagleboneblack/full_beagleboneblack.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := beagleboneblack
-PRODUCT_DEVICE := cm_beagleboneblack
+PRODUCT_NAME := cm_beagleboneblack
+PRODUCT_DEVICE := beagleboneblack
 PRODUCT_BRAND := Cyanogenmod
 PRODUCT_MODEL := BEAGLEBONEBLACK
 PRODUCT_MANUFACTURER := Texas_Instruments_Inc
