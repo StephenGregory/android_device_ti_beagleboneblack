@@ -53,8 +53,8 @@
 
 #added
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system/build.prop)
+$(call add-clean-step, rm -rf $(TARGET_OUT)/build.prop)
 
-#$(call add-clean-step, rm -rf $(TARGET_OUT)/build.prop)
 #$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/galaxysbmtd/obj/SHARED_LIBRARIES/libaudio_intermediates)
 #$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/galaxysbmtd/obj/SHARED_LIBRARIES/libaudio_intermediates)
 #$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/galaxysbmtd/obj/STATIC_LIBRARIES/libasound_intermediates)

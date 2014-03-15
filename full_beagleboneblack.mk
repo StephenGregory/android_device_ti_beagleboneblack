@@ -19,23 +19,35 @@
 # product configuration (apps).
 #
 
+# Live Wallpapers
+PRODUCT_PACKAGES += \
+        LiveWallpapers \
+        LiveWallpapersPicker \
+        MagicSmokeWallpapers \
+        VisualizationWallpapers \
+        librs_jni
+
+PRODUCT_PROPERTY_OVERRIDES := \
+        net.dns1=8.8.8.8 \
+        net.dns2=8.8.4.4
+
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
-
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk) #not in panda #test commented
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/ti/beagleboneblack/device.mk)
+#$(call inherit-product-if-exists, vendor/ti/proprietary/omap3xxx/ti-omap3-vendor.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_beagleboneblack
 PRODUCT_DEVICE := beagleboneblack
-PRODUCT_BRAND := Cyanogenmod
+PRODUCT_BRAND := Android #panda has Android
+PRODUCT_MODEL := BEAGLEBONEBLACK
 PRODUCT_MANUFACTURER := Texas_Instruments_Inc
 
-PRODUCT_MODEL := BEAGLEBONEBLACK
 ############SAMSUNG#################
 # Galaxy S uses high-density artwork where available
 #PRODUCT_LOCALES += hdpi
 
+# This is where we'd set a backup provider if we had one
+#$(call inherit-product, device/sample/products/backup_overlay.mk)

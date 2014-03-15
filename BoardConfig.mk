@@ -17,6 +17,15 @@
 # Product-specific compile-time definitions.
 #
 
+##a potential fix for : http://forum.cyanogenmod.com/topic/77404-porting-cyanogenmod-101-to-hyundai-t7s/
+#frameworks/base/core/java/android/app/admin/DeviceAdminInfo.java:411: error 101: Unresolved link/see tag "#USES_POLICY_ENFORCE_MMAC" in android.app.admin.DeviceAdminInfo
+#frameworks/base/core/java/android/app/admin/DeviceAdminInfo.java:411: error 101: Unresolved link/see tag "#USES_POLICY_ENFORCE_SELINUX" in android.app.admin.DeviceAdminInfo
+#frameworks/base/telephony/java/android/telephony/NeighboringCellInfo.java:104: error 101: Unresolved link/see tag "TelephonyManager#NETWORK_TYPE_DCHSPAP TelephonyManager.NETWORK_TYPE_DCHSPAP" in android.telephony.NeighboringCellInfo
+#frameworks/base/telephony/java/android/telephony/NeighboringCellInfo.java:166: error 101: Unresolved link/see tag "TelephonyManager#NETWORK_TYPE_DCHSPAP TelephonyManager.NETWORK_TYPE_DCHSPAP" in android.telephony.NeighboringCellInfo
+#DroidDoc took 1663 sec. to write docs to /home/sgregory/Storage/android/system/out/target/common/docs/doc-comment-check
+#make: *** [/home/sgregory/Storage/android/system/out/target/common/docs/doc-comment-check-timestamp] Error 45
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+
 #added
 BOARD_USES_GENERIC_AUDIO := true
 BOARD_EGL_CFG := device/ti/beagleboneblack/egl.cfg
@@ -28,15 +37,29 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon#not for recovery
 ARCH_ARM_HAVE_TLS_REGISTER := true#not for recovery
 
+BOARD_HAVE_BLUETOOTH := false
+TARGET_NO_BOOTLOADER := true#not for recovery, this is a non-fastboot indication
+
+BOARD_KERNEL_BASE := 0x80000000
+#BOARD_KERNEL_CMDLINE:= #not all devices pass boot parameters however if your device does this must be filled out properly in order to boot successfully.
+
+TARGET_NO_RADIOIMAGE := true
+TARGET_BOARD_PLATFORM := omap3
+TARGET_BOOTLOADER_BOARD_NAME := beagleboneblack
+
 # Kernel Config
 TARGET_PREBUILT_KERNEL := device/ti/beagleboneblack/zImage #specify path for prebuilt kernel
 TARGET_NO_KERNEL := true #flag for whether or not to use prebuilt kernel
 #TARGET_KERNEL_CONFIG := beagleboneblack_defconfig, configuration file for the BBB filename in linux-dev/KERNEL/arch/arm/config
-TARGET_NO_BOOTLOADER := true#not for recovery, this is a non-fastboot indication
 
-#BOARD_KERNEL_CMDLINE:= #not all devices pass boot parameters however if your device does this must be filled out properly in order to boot successfully.
 
-BOARD_KERNEL_PAGESIZE:= 0x00002048 #the pagesize of the stock boot.img and must be set properly in order to boot. Typical values for this are 2048 and 4096 and this information can be extracted from the stock kernel.
+
+#Panda doesn't have this
+#BOARD_KERNEL_PAGESIZE:= 0x00002048 #the pagesize of the stock boot.img and must be set properly in order to boot. Typical values for this are 2048 and 4096 and this information can be extracted from the stock kernel.
+#test commented
+
+BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
 BOARD_BOOTIMAGE_PARTITION_SIZE:= 10485760#something random, the number of bytes allocated to the kernel image partition.
 
@@ -51,27 +74,20 @@ BOARD_FLASH_BLOCK_SIZE := 4096 #not recvoery
 #BOARD_HAS_NO_SELECT_BUTTON: (optional), use this if your device needs to use its Power button to confirm selections in recovery.
 #BOARD_MKBOOTIMG_ARGS: (optional), use these to force a specific address for the ramdisk. This is usually needed on larger partitions in order for the ramdisk to be loaded properly where it's expected to exist. This value can be obtained from the stock kernel. 
 
-#BOARD_HAVE_BLUETOOTH := false
-
 #TARGET_NO_RECOVERY := true
 
-TARGET_NO_RADIOIMAGE := true
-TARGET_BOARD_PLATFORM := omap3
-TARGET_BOOTLOADER_BOARD_NAME := beagleboneblack
 BOARD_USB_CAMERA := true
 #BOARD_USES_HGL := true
 #BOARD_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
 
-TARGET_PROVIDES_INIT_RC := true #this isn't enabled in old src
+TARGET_PROVIDES_INIT_RC := true #this isn't enabled in old src, or panda
 
-#this is all extra
+#test without it
 #BOARD_WPA_SUPPLICANT_DRIVER      := WEXT
 #BOARD_HOSTAPD_DRIVER             := WEXT
 #WPA_SUPPLICANT_VERSION           := VER_0_8_X
 #BOARD_WLAN_DEVICE                := wlan0
-
-
 
 ############SAMSUNG#################
 

@@ -34,25 +34,42 @@
 # and is used by people who have access to binary versions of the drivers
 # but not to the original vendor tree. Be sure to update both.
 
-# KeyPads
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+    LOCAL_KERNEL := device/ti/beagleboneblack/kernel
+else
+    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+# Init files
+PRODUCT_COPY_FILES = \
+        $(LOCAL_KERNEL):kernel \
+	device/ti/beagleboneblack/init.am335xevm.rc:root/init.am335xevm.rc \
+	device/ti/beagleboneblack/init.am335xevm.usb.rc:root/init.am335xevm.usb.rc \
+	device/ti/beagleboneblack/vold.fstab:system/etc/vold.fstab \
+	device/ti/beagleboneblack/fstab.am335xevm:root/fstab.am335xevm \
+	device/ti/beagleboneblack/ueventd.am335xevm.rc:root/ueventd.am335xevm.rc \
+	device/ti/beagleboneblack/media_codecs.xml:system/etc/media_codecs.xml \
+	device/ti/beagleboneblack/media_profiles.xml:system/etc/media_profiles.xml \
+	device/ti/beagleboneblack/mixer_paths.xml:system/etc/mixer_paths.xml \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf \
+	device/ti/beagleboneblack/gpio-keys.kl:system/usr/keylayout/gpio_keys_13.kl \
+	device/ti/beagleboneblack/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
+	device/ti/beagleboneblack/egl.cfg:system/lib/egl/egl.cfg
+
+#WiFi
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio_keys_13.kl \
-    $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
-
-# These are the hardware-specific configuration files
-PRODUCT_COPY_FILES := \
-	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf 
-
-PRODUCT_PROPERTY_OVERRIDES := \
-       hwui.render_dirty_regions=false
-
-# Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
-PRODUCT_PROPERTY_OVERRIDES += \
-       ro.sf.lcd_density=160
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.strictmode.visual=0 \
-	persist.sys.strictmode.disable=1
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	device/ti/beagleboneblack/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+	device/ti/beagleboneblack/rtl8192cufw.bin:root/lib/firmware/rtlwifi/rtl8192cufw.bin \
+	device/ti/beagleboneblack/rt2870.bin:root/lib/firmware/rt2870.bin \
+	device/ti/beagleboneblack/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko:system/lib/modules/rtlwifi.ko \
+	kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko:system/lib/modules/rtl8192c-common.ko \
+	kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu.ko:system/lib/modules/rtl8192cu.ko
+#	kernel/net/rfkill/rfkill.ko:system/lib/modules/rfkill.ko \
+#	kernel/net/wireless/cfg80211.ko:system/lib/modules/cfg80211.ko \
+#	kernel/net/mac80211/mac80211.ko:system/lib/modules/mac80211.ko 
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
@@ -65,6 +82,28 @@ PRODUCT_PACKAGES += \
 	librs_jni \
 	com.android.future.usb.accessory
 
+PRODUCT_COPY_FILES += \
+	device/ti/beagleboneblack/audio_policy.conf:system/etc/audio_policy.conf 
+
+PRODUCT_PACKAGES += \
+	dhcpcd.conf \
+	calibrator #added
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+	make_ext4fs
+
+PRODUCT_PROPERTY_OVERRIDES += \
+       hwui.render_dirty_regions=false
+
+# Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.sf.lcd_density=160
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.strictmode.visual=0 \
+	persist.sys.strictmode.disable=1
+
 PRODUCT_PACKAGES += \
 	libaudioutils
 
@@ -74,16 +113,10 @@ PRODUCT_PACKAGES += \
         tinymix \
         tinyplay
 
-PRODUCT_PACKAGES += \
-	dhcpcd.conf
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs
-
 # Backlight HAL (liblights)
 PRODUCT_PACKAGES += \
-	lights.beagleboneblack
+	lights.beagleboneblack \
+	overlay.beagleboneblack
 
 PRODUCT_PACKAGES += \
 	FileManager-1.1.6
@@ -97,7 +130,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_NAME := beagleboneblack
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-
+#$(call inherit-product-if-exists, vendor/ti/proprietary/omap3/ti-omap3-vendor.mk)
 
 ###############SAMSUNG##############
 
@@ -113,3 +146,110 @@ $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 # of the aspects that require proprietary drivers that aren't
 # commonly available
 #$(call inherit-product-if-exists, vendor/samsung/galaxysbmtd/galaxysbmtd-vendor.mk)
+
+
+###########SAMSUNG##############
+
+# Filesystem management tools
+#PRODUCT_PACKAGES += \
+#	make_ext4fs \
+#	setup_fs
+
+# These are the OpenMAX IL configuration files
+#PRODUCT_COPY_FILES += \
+#	device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+#	device/samsung/aries-common/media_profiles.xml:system/etc/media_profiles.xml
+
+# These are the OpenMAX IL modules
+#PRODUCT_PACKAGES += \
+#	libSEC_OMX_Core.aries \
+#	libOMX.SEC.AVC.Decoder.aries \
+#	libOMX.SEC.M4V.Decoder.aries \
+#	libOMX.SEC.M4V.Encoder.aries \
+#	libOMX.SEC.AVC.Encoder.aries
+
+# Misc other modules
+#PRODUCT_PACKAGES += \
+#	lights.aries \
+#	overlay.aries \
+#	sensors.aries
+
+# Libs
+#PRODUCT_PACKAGES += \
+#	libcamera \
+#	libstagefrighthw
+
+# apns config file
+#PRODUCT_COPY_FILES += \
+#        vendor/cyanogen/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+
+# Bluetooth MAC Address
+#PRODUCT_PACKAGES += \
+#	bdaddr_read
+
+# Device-specific packages
+#PRODUCT_PACKAGES += \
+#	SamsungServiceMode \
+#	AriesParts
+
+# These are the hardware-specific features
+#PRODUCT_COPY_FILES += \
+#	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+#	frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+#	frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+#	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+#       frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
+#	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+#	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+#	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+#	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+#	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+#	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+#	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+
+# The OpenGL ES API level that is natively supported by this device.
+# This is a 16.16 fixed point number
+#PRODUCT_PROPERTY_OVERRIDES := \
+#    ro.opengles.version=131072
+
+# These are the hardware-specific settings that are stored in system properties.
+# Note that the only such settings should be the ones that are too low-level to
+# be reachable from resources or other mechanisms.
+#PRODUCT_PROPERTY_OVERRIDES += \
+#       wifi.interface=eth0 \
+#       wifi.supplicant_scan_interval=20 \
+#       ro.telephony.ril_class=samsung \
+#       mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
+#       dalvik.vm.heapsize=32m
+
+# enable Google-specific location features,
+# like NetworkLocationProvider and LocationCollector
+#PRODUCT_PROPERTY_OVERRIDES += \
+#        ro.com.google.locationfeatures=1 \
+#        ro.com.google.networklocation=1
+
+# Extended JNI checks
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# before they have a chance to cause problems.
+# Default=true for development builds, set by android buildsystem.
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.kernel.android.checkjni=0 \
+#    dalvik.vm.checkjni=false \
+#    persist.sys.vold.switchexternal=1
+
+# we have enough storage space to hold precise GC data
+#PRODUCT_TAGS += dalvik.gc.type-precise
+
+# kernel modules
+#PRODUCT_COPY_FILES += $(foreach module,\
+#	$(wildcard device/ti/beagleboneblack/*.ko),\
+#	$(module):system/lib/modules/$(notdir $(module)))
+
+#PRODUCT_COPY_FILES += \
+#	device/samsung/aries-common/updater.sh:updater.sh
+
+# See comment at the top of this file. This is where the other
+# half of the device-specific product definition file takes care
+# of the aspects that require proprietary drivers that aren't
+# commonly available
+#$(call inherit-product-if-exists, vendor/ti/beagleboneblack/beagleboneblack-vendor.mk)

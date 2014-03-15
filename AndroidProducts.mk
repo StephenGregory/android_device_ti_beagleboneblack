@@ -25,7 +25,5 @@
 # it includes.
 #
 
-#PRODUCT_MAKEFILES := $(LOCAL_DIR)/beagleboneblack.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/full_beagleboneblack.mk
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_beagleboneblack.mk
